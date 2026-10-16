@@ -1,0 +1,112 @@
+/* House Planner - app.css (canvas agent): the drawing board and its overlays.
+   Uses the tokens in theme.css. ASCII only (escapes for any symbol).          */
+
+.hp-stage { background: var(--bg); user-select: none; -webkit-user-select: none; }
+
+.hp-board {
+  position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+  display: block; touch-action: none; outline: none; cursor: default;
+}
+.hp-board:focus-visible { box-shadow: inset 0 0 0 2px var(--accent-dim); }
+
+.hp-ov {
+  position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+  font-family: var(--sans); z-index: 2;
+}
+
+/* ---------------------------------------------------------------- chips */
+.hp-chip {
+  position: absolute; left: 0; top: 0; white-space: nowrap;
+  margin: 0; will-change: transform;
+  translate: -50% -50%;
+  border-radius: 9px; line-height: 1;
+}
+/* live size read-outs while a wall moves: big and legible */
+.hp-chip--size {
+  font: 650 17px/1 var(--mono); letter-spacing: .02em;
+  color: var(--accent-ink); background: var(--accent);
+  padding: 7px 11px 7px 11px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .45), 0 0 0 1px rgba(255, 255, 255, .18) inset;
+  font-variant-numeric: tabular-nums;
+}
+.hp-chip--size.has-arrow-h::before,
+.hp-chip--size.has-arrow-v::before {
+  content: ""; display: inline-block; width: 16px; height: 10px; margin-right: 7px;
+  vertical-align: -1px; background: currentColor; opacity: .75;
+  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 10'><path d='M0 5 L4 1 L4 4 L12 4 L12 1 L16 5 L12 9 L12 6 L4 6 L4 9 Z' fill='black'/></svg>") center / contain no-repeat;
+          mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 10'><path d='M0 5 L4 1 L4 4 L12 4 L12 1 L16 5 L12 9 L12 6 L4 6 L4 9 Z' fill='black'/></svg>") center / contain no-repeat;
+}
+.hp-chip--size.has-arrow-v::before { rotate: 90deg; width: 14px; }
+
+/* why something can't go there (red ghost) */
+.hp-chip--reason {
+  font: 600 13px/1.3 var(--sans); color: #fff;
+  background: rgba(196, 52, 46, .96);
+  padding: 7px 11px; max-width: 300px; white-space: normal;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, .45);
+}
+.hp-chip--reason.is-left { translate: 0 0; }
+
+/* "Swap with Kitchen" while a room's name is dragged onto another room */
+.hp-chip--swap {
+  font: 650 13px/1 var(--sans); color: #1b1306;
+  background: var(--warn); padding: 7px 11px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .45);
+}
+
+/* edge lengths of the land, opening widths while dragging */
+.hp-chip--edge {
+  font: 600 12px/1 var(--mono); color: var(--ink2);
+  background: rgba(21, 29, 40, .92); border: 1px solid var(--line2);
+  padding: 4px 7px; border-radius: 6px;
+  font-variant-numeric: tabular-nums;
+}
+.hp-chip--edge.is-street { color: var(--accent); border-color: var(--accent-dim); }
+
+/* ---------------------------------------------------------------- hover hint */
+.hp-tip {
+  position: absolute; left: 0; top: 0; max-width: 290px;
+  font: 500 12.5px/1.35 var(--sans); color: var(--ink);
+  background: rgba(27, 39, 53, .97); border: 1px solid var(--line2);
+  padding: 7px 10px; border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+  opacity: 0; transition: opacity .14s ease; visibility: hidden;
+}
+.hp-tip.is-on { opacity: 1; visibility: visible; }
+
+/* ---------------------------------------------------------------- empty plan */
+.hp-empty {
+  position: absolute; left: 0; top: 0; translate: -50% -50%;
+  text-align: center; max-width: 340px; padding: 18px 22px;
+  border: 1.5px dashed rgba(22, 182, 201, .38); border-radius: 14px;
+  background: rgba(15, 22, 32, .72);
+  opacity: 0; visibility: hidden; transition: opacity .2s ease;
+}
+.hp-empty.is-on { opacity: 1; visibility: visible; }
+.hp-empty__big { font: 600 16px/1.35 var(--sans); color: var(--ink); }
+.hp-empty__small { margin-top: 6px; font: 400 13px/1.4 var(--sans); color: var(--muted); }
+
+/* ---------------------------------------------------------------- context menu */
+.hp-menu {
+  position: absolute; left: 0; top: 0; min-width: 210px;
+  pointer-events: auto; padding: 5px;
+  background: var(--panel2); border: 1px solid var(--line2);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+  display: none;
+}
+.hp-menu.is-on { display: block; }
+.hp-menu__item {
+  display: flex; align-items: center; justify-content: space-between; gap: 18px;
+  width: 100%; padding: 8px 10px; border: 0; border-radius: var(--radius-sm);
+  background: transparent; color: var(--ink);
+  font: 500 13.5px/1.2 var(--sans); text-align: left; cursor: pointer;
+}
+.hp-menu__item:hover, .hp-menu__item:focus-visible { background: var(--panel3); outline: none; }
+.hp-menu__item:disabled { color: var(--muted); cursor: default; background: transparent; opacity: .6; }
+.hp-menu__item.is-bad { color: #f08a84; }
+.hp-menu__item.is-bad:hover { background: rgba(229, 83, 75, .14); }
+.hp-menu__item kbd {
+  font: 500 11px/1 var(--mono); color: var(--muted);
+  border: 1px solid var(--line2); border-radius: 5px; padding: 3px 5px;
+}
+.hp-menu__sep { height: 1px; margin: 4px 6px; background: var(--line); }

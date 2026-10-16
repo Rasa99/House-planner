@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>House Planner</title>
+<!-- panels agent DEV page: the real src/ modules that exist + dev/panels-stub.js for the rest.
+     ?empty  starts from a new plan instead of test/fixtures/sample-house.json -->
+<link rel="stylesheet" href="../src/theme.css">
+<link rel="stylesheet" href="../src/app.css">
+<link rel="stylesheet" href="../src/panels.css">
+</head>
+<body>
+<div id="app">
+  <header id="topbar"></header>
+  <aside id="palette"></aside>
+  <main id="stage"></main>
+  <aside id="sidebar"></aside>
+  <footer id="statusbar"></footer>
+</div>
+<script>
+// keep this page's autosave apart from the real app's (same origin, shared localStorage)
+(function () {
+  const REAL = "houseplanner.autosave.v1", MINE = "houseplanner.autosave.panels-dev";
+  const set = Storage.prototype.setItem, get = Storage.prototype.getItem;
+  Storage.prototype.setItem = function (k, v) { return set.call(this, k === REAL ? MINE : k, v); };
+  Storage.prototype.getItem = function (k) { return get.call(this, k === REAL ? MINE : k); };
+})();
+</script>
+<script src="../src/core.js"></script>
+<script src="../src/store.js"></script>
+<script src="../src/analyze.js"></script>
+<script src="../src/model.js"></script>
+<script src="../src/furniture.js"></script>
+<script src="../src/drawing.js"></script>
+<script src="../src/dxf.js"></script>
+<script src="../src/render.js"></script>
+<script src="../src/canvas.js"></script>
+<script src="panels-stub.js"></script>
+<script src="../src/panels.js"></script>
+<script>
+"use strict";
+(async function boot() {
+  let plan = null;
+  if (!/[?&]empty/.test(location.search)) {
+    try { plan = HP.deserialize(await (await fetch("../test/fixtures/sample-house.json", { cache: "no-store" })).text()); }
+    catch (e) { console.warn("sample not loaded", e); }
+  }
+  HP.store.init(plan || HP.newPlan());
+  try { HP.canvas.init(document.getElementById("stage")); }
+  catch (e) { console.error("[panels-dev] canvas.init failed - try ?stub=canvas", e); }
+  HP.panels.init({
+    topbar: document.getElementById("topbar"),
+    palette: document.getElementById("palette"),
+    sidebar: document.getElementById("sidebar"),
+    statusbar: document.getElementById("statusbar"),
+  });
+  try { HP.canvas.fit(); } catch (e) { console.error("[panels-dev] canvas.fit failed", e); }
+  console.log("[panels-dev] stand-ins:", HP.__stubs.join(", ") || "none");
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>House Planner</title>
+<link rel="stylesheet" href="src/theme.css">
+<link rel="stylesheet" href="src/app.css">
+<link rel="stylesheet" href="src/panels.css">
+</head>
+<body>
+<div id="app">
+  <header id="topbar"></header>     <!-- panels.js -->
+  <aside id="palette"></aside>      <!-- panels.js : rooms, doors, windows, section -->
+  <main id="stage"></main>          <!-- canvas.js : the drawing board -->
+  <aside id="sidebar"></aside>      <!-- panels.js : land, streets, walls, inspector, rules -->
+  <footer id="statusbar"></footer>  <!-- panels.js -->
+</div>
+<!-- load order matters: every module adds itself to globalThis.HP -->
+<script src="src/core.js"></script>
+<script src="src/store.js"></script>
+<script src="src/analyze.js"></script>
+<script src="src/model.js"></script>
+<script src="src/furniture.js"></script>
+<script src="src/drawing.js"></script>
+<script src="src/dxf.js"></script>
+<script src="src/render.js"></script>
+<script src="src/canvas.js"></script>
+<script src="src/panels.js"></script>
+<script>
+"use strict";
+(function boot() {
+  HP.store.init();
+  HP.canvas.init(document.getElementById("stage"));
+  HP.panels.init({
+    topbar: document.getElementById("topbar"),
+    palette: document.getElementById("palette"),
+    sidebar: document.getElementById("sidebar"),
+    statusbar: document.getElementById("statusbar"),
+  });
+  HP.canvas.fit();
+})();
+</script>
+</body>
+</html>

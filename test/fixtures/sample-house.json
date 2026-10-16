@@ -1,0 +1,41 @@
+{
+ "version": 1,
+ "meta": { "title": "Sample courtyard house", "created": "2026-10-14T00:00:00.000Z", "modified": "2026-10-14T00:00:00.000Z" },
+ "plot": {
+  "pts": [[0, 0], [1000, 0], [1000, 1900], [0, 1900]],
+  "edges": ["street", "neighbour", "neighbour", "neighbour"],
+  "road": 800
+ },
+ "walls": { "ext": 20, "int": 20 },
+ "rooms": [
+  { "id": "r1", "type": "living",  "name": "Living room", "x": 20,  "y": 720,  "w": 420, "h": 470, "furn": 0 },
+  { "id": "r2", "type": "kitchen", "name": "Kitchen",     "x": 460, "y": 720,  "w": 260, "h": 470, "furn": 0 },
+  { "id": "r3", "type": "wc",      "name": "Toilet (WC)", "x": 740, "y": 720,  "w": 240, "h": 180, "furn": 0 },
+  { "id": "r4", "type": "bath",    "name": "Bathroom",    "x": 740, "y": 920,  "w": 240, "h": 270, "furn": 0 },
+  { "id": "r5", "type": "open",    "name": "Open area",   "x": 20,  "y": 1210, "w": 960, "h": 210, "furn": 0 },
+  { "id": "r6", "type": "bedroom", "name": "Bedroom 1",   "x": 20,  "y": 1440, "w": 310, "h": 440, "furn": 0 },
+  { "id": "r7", "type": "bedroom", "name": "Bedroom 2",   "x": 350, "y": 1440, "w": 300, "h": 440, "furn": 0 },
+  { "id": "r8", "type": "bedroom", "name": "Bedroom 3",   "x": 670, "y": 1440, "w": 310, "h": 440, "furn": 0 }
+ ],
+ "openings": [
+  { "id": "o10", "kind": "door",   "room": "r1", "side": "S", "at": 40,  "w": 100, "hinge": "start", "swing": "in" },
+  { "id": "o11", "kind": "window", "room": "r1", "side": "S", "at": 200, "w": 150 },
+  { "id": "o12", "kind": "door",   "room": "r1", "side": "N", "at": 280, "w": 80,  "hinge": "start", "swing": "in" },
+  { "id": "o13", "kind": "window", "room": "r2", "side": "S", "at": 55,  "w": 150 },
+  { "id": "o14", "kind": "door",   "room": "r2", "side": "N", "at": 20,  "w": 80,  "hinge": "start", "swing": "in" },
+  { "id": "o15", "kind": "door",   "room": "r3", "side": "S", "at": 20,  "w": 80,  "hinge": "start", "swing": "in" },
+  { "id": "o16", "kind": "window", "room": "r3", "side": "S", "at": 150, "w": 60 },
+  { "id": "o17", "kind": "door",   "room": "r4", "side": "N", "at": 20,  "w": 80,  "hinge": "start", "swing": "in" },
+  { "id": "o18", "kind": "window", "room": "r4", "side": "N", "at": 150, "w": 60 },
+  { "id": "o19", "kind": "door",   "room": "r6", "side": "S", "at": 20,  "w": 80,  "hinge": "start", "swing": "in" },
+  { "id": "o20", "kind": "window", "room": "r6", "side": "S", "at": 140, "w": 120 },
+  { "id": "o21", "kind": "door",   "room": "r7", "side": "S", "at": 20,  "w": 80,  "hinge": "start", "swing": "in" },
+  { "id": "o22", "kind": "window", "room": "r7", "side": "S", "at": 140, "w": 120 },
+  { "id": "o23", "kind": "door",   "room": "r8", "side": "S", "at": 20,  "w": 80,  "hinge": "start", "swing": "in" },
+  { "id": "o24", "kind": "window", "room": "r8", "side": "S", "at": 140, "w": 120 }
+ ],
+ "sections": [
+  { "id": "s30", "label": "A", "a": [550, 550], "b": [550, 2050], "look": 1 }
+ ],
+ "seq": 40
+}

@@ -1,0 +1,38 @@
+{
+ "version": 1,
+ "meta": { "title": "Drafting test - five-corner plot", "created": "2026-10-15T00:00:00.000Z", "modified": "2026-10-15T00:00:00.000Z",
+           "note": "drafting agent fixture: a plot with two slanted back edges (aligned land dimensions, a yard that is not a rectangle), street at the front only, house flush with both sides, a vertical section looking left. Not meant to pass every rule." },
+ "plot": {
+  "pts": [[0, 0], [1200, 0], [1200, 1500], [600, 1800], [0, 1500]],
+  "edges": ["street", "neighbour", "neighbour", "neighbour", "neighbour"],
+  "road": 600
+ },
+ "walls": { "ext": 20, "int": 20 },
+ "rooms": [
+  { "id": "r1", "type": "living",  "name": "Living room", "x": 20,  "y": 620,  "w": 560, "h": 400, "furn": 0 },
+  { "id": "r2", "type": "kitchen", "name": "Kitchen",     "x": 600, "y": 620,  "w": 300, "h": 400, "furn": 0 },
+  { "id": "r3", "type": "bath",    "name": "Bathroom",    "x": 920, "y": 620,  "w": 260, "h": 240, "furn": 0 },
+  { "id": "r4", "type": "wc",      "name": "Toilet (WC)", "x": 920, "y": 880,  "w": 260, "h": 140, "furn": 0 },
+  { "id": "r5", "type": "open",    "name": "Open area",   "x": 20,  "y": 1040, "w": 400, "h": 200, "furn": 0 },
+  { "id": "r6", "type": "bedroom", "name": "Bedroom 1",   "x": 440, "y": 1040, "w": 360, "h": 420, "furn": 0 },
+  { "id": "r7", "type": "bedroom", "name": "Bedroom 2",   "x": 820, "y": 1040, "w": 360, "h": 420, "furn": 0 }
+ ],
+ "openings": [
+  { "id": "o10", "kind": "door",   "room": "r1", "side": "S", "at": 60,  "w": 100, "hinge": "start", "swing": "in" },
+  { "id": "o11", "kind": "window", "room": "r1", "side": "S", "at": 250, "w": 150 },
+  { "id": "o12", "kind": "window", "room": "r2", "side": "S", "at": 75,  "w": 150 },
+  { "id": "o13", "kind": "door",   "room": "r2", "side": "W", "at": 100, "w": 80,  "hinge": "start", "swing": "in" },
+  { "id": "o14", "kind": "door",   "room": "r1", "side": "N", "at": 100, "w": 80,  "hinge": "end",   "swing": "in" },
+  { "id": "o15", "kind": "door",   "room": "r6", "side": "W", "at": 40,  "w": 80,  "hinge": "start", "swing": "in" },
+  { "id": "o16", "kind": "window", "room": "r6", "side": "N", "at": 120, "w": 120 },
+  { "id": "o17", "kind": "door",   "room": "r7", "side": "W", "at": 300, "w": 80,  "hinge": "end",   "swing": "in" },
+  { "id": "o18", "kind": "window", "room": "r7", "side": "N", "at": 20,  "w": 120 },
+  { "id": "o19", "kind": "door",   "room": "r4", "side": "W", "at": 30,  "w": 80,  "hinge": "start", "swing": "in" },
+  { "id": "o20", "kind": "door",   "room": "r3", "side": "W", "at": 40,  "w": 80,  "hinge": "start", "swing": "in" },
+  { "id": "o21", "kind": "window", "room": "r3", "side": "S", "at": 100, "w": 60 }
+ ],
+ "sections": [
+  { "id": "s30", "label": "A", "a": [300, -200], "b": [300, 1900], "look": 1 }
+ ],
+ "seq": 40
+}

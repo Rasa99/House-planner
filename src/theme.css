@@ -1,0 +1,44 @@
+/* House Planner - theme.css (shared design tokens; owned by integration)
+   The plan colours come from Rasa's reference DXF via the old generator;
+   the interface colours are the old generator's panel palette.            */
+:root {
+  --bg: #0f1620;          /* canvas / plan background */
+  --panel: #151d28;
+  --panel2: #1b2735;
+  --panel3: #223042;
+  --line: #26313f;
+  --line2: #33414f;
+  --ink: #dfe6ef;
+  --ink2: #b4bfcd;
+  --muted: #7c8798;
+  --accent: #16b6c9;      /* the dimension cyan */
+  --accent-ink: #06222a;
+  --accent-dim: #0e5f6c;
+  --good: #4bbf7a;
+  --warn: #e0a542;
+  --bad: #e5534b;
+  --wall: #a04040;
+  --glass: #2e9bd6;
+  --label: #9a9ae4;
+  --radius: 10px;
+  --radius-sm: 7px;
+  --shadow: 0 10px 28px rgba(0, 0, 0, .38);
+  --sans: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+  --mono: "Cascadia Code", "Cascadia Mono", Consolas, ui-monospace, monospace;
+  --topbar-h: 52px;
+  --status-h: 30px;
+  --palette-w: 232px;
+  --sidebar-w: 300px;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink);
+  font-family: var(--sans); font-size: 14px; -webkit-font-smoothing: antialiased; }
+#app { display: grid; height: 100vh; overflow: hidden;
+  grid-template-columns: var(--palette-w) 1fr var(--sidebar-w);
+  grid-template-rows: var(--topbar-h) 1fr var(--status-h);
+  grid-template-areas: "top top top" "palette stage sidebar" "status status status"; }
+#topbar { grid-area: top; }
+#palette { grid-area: palette; min-height: 0; }
+#stage { grid-area: stage; position: relative; min-width: 0; min-height: 0; overflow: hidden; }
+#sidebar { grid-area: sidebar; min-height: 0; }
+#statusbar { grid-area: status; }

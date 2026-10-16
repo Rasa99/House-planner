@@ -1,0 +1,573 @@
+{
+ "version": 1,
+ "meta": {
+  "title": "Twenty rooms",
+  "created": "2026-10-14T00:00:00.000Z",
+  "modified": "2026-10-14T00:00:00.000Z"
+ },
+ "plot": {
+  "pts": [
+   [
+    0,
+    0
+   ],
+   [
+    1780,
+    0
+   ],
+   [
+    1780,
+    3000
+   ],
+   [
+    0,
+    3000
+   ]
+  ],
+  "edges": [
+   "street",
+   "neighbour",
+   "neighbour",
+   "neighbour"
+  ],
+  "road": 800
+ },
+ "walls": {
+  "ext": 20,
+  "int": 20
+ },
+ "rooms": [
+  {
+   "id": "r1",
+   "type": "living",
+   "name": "Living room",
+   "x": 20,
+   "y": 720,
+   "w": 420,
+   "h": 400,
+   "furn": 0
+  },
+  {
+   "id": "r2",
+   "type": "kitchen",
+   "name": "Kitchen 1",
+   "x": 460,
+   "y": 720,
+   "w": 420,
+   "h": 400,
+   "furn": 0
+  },
+  {
+   "id": "r3",
+   "type": "reception",
+   "name": "Reception",
+   "x": 900,
+   "y": 720,
+   "w": 420,
+   "h": 400,
+   "furn": 0
+  },
+  {
+   "id": "r4",
+   "type": "bath",
+   "name": "Bathroom 1",
+   "x": 1340,
+   "y": 720,
+   "w": 420,
+   "h": 400,
+   "furn": 0
+  },
+  {
+   "id": "r5",
+   "type": "bedroom",
+   "name": "Bedroom 1",
+   "x": 20,
+   "y": 1140,
+   "w": 420,
+   "h": 380,
+   "furn": 0
+  },
+  {
+   "id": "r6",
+   "type": "hall",
+   "name": "Hall 1",
+   "x": 460,
+   "y": 1140,
+   "w": 420,
+   "h": 380,
+   "furn": 0
+  },
+  {
+   "id": "r7",
+   "type": "wc",
+   "name": "Toilet (WC) 1",
+   "x": 900,
+   "y": 1140,
+   "w": 420,
+   "h": 380,
+   "furn": 0
+  },
+  {
+   "id": "r8",
+   "type": "bedroom",
+   "name": "Bedroom 2",
+   "x": 1340,
+   "y": 1140,
+   "w": 420,
+   "h": 380,
+   "furn": 0
+  },
+  {
+   "id": "r9",
+   "type": "open",
+   "name": "Open area 1",
+   "x": 20,
+   "y": 1540,
+   "w": 420,
+   "h": 300,
+   "furn": 0
+  },
+  {
+   "id": "r10",
+   "type": "open",
+   "name": "Open area 2",
+   "x": 460,
+   "y": 1540,
+   "w": 420,
+   "h": 300,
+   "furn": 0
+  },
+  {
+   "id": "r11",
+   "type": "open",
+   "name": "Open area 3",
+   "x": 900,
+   "y": 1540,
+   "w": 420,
+   "h": 300,
+   "furn": 0
+  },
+  {
+   "id": "r12",
+   "type": "open",
+   "name": "Open area 4",
+   "x": 1340,
+   "y": 1540,
+   "w": 420,
+   "h": 300,
+   "furn": 0
+  },
+  {
+   "id": "r13",
+   "type": "bedroom",
+   "name": "Bedroom 3",
+   "x": 20,
+   "y": 1860,
+   "w": 420,
+   "h": 420,
+   "furn": 0
+  },
+  {
+   "id": "r14",
+   "type": "bath",
+   "name": "Bathroom 2",
+   "x": 460,
+   "y": 1860,
+   "w": 420,
+   "h": 420,
+   "furn": 0
+  },
+  {
+   "id": "r15",
+   "type": "wc",
+   "name": "Toilet (WC) 2",
+   "x": 900,
+   "y": 1860,
+   "w": 420,
+   "h": 420,
+   "furn": 0
+  },
+  {
+   "id": "r16",
+   "type": "bedroom",
+   "name": "Bedroom 4",
+   "x": 1340,
+   "y": 1860,
+   "w": 420,
+   "h": 420,
+   "furn": 0
+  },
+  {
+   "id": "r17",
+   "type": "bedroom",
+   "name": "Bedroom 5",
+   "x": 20,
+   "y": 2300,
+   "w": 420,
+   "h": 400,
+   "furn": 0
+  },
+  {
+   "id": "r18",
+   "type": "kitchen",
+   "name": "Kitchen 2",
+   "x": 460,
+   "y": 2300,
+   "w": 420,
+   "h": 400,
+   "furn": 0
+  },
+  {
+   "id": "r19",
+   "type": "hall",
+   "name": "Hall 2",
+   "x": 900,
+   "y": 2300,
+   "w": 420,
+   "h": 400,
+   "furn": 0
+  },
+  {
+   "id": "r20",
+   "type": "bedroom",
+   "name": "Bedroom 6",
+   "x": 1340,
+   "y": 2300,
+   "w": 420,
+   "h": 400,
+   "furn": 0
+  }
+ ],
+ "openings": [
+  {
+   "id": "o21",
+   "kind": "door",
+   "room": "r1",
+   "side": "S",
+   "at": 20,
+   "w": 80,
+   "hinge": "start",
+   "swing": "in"
+  },
+  {
+   "id": "o22",
+   "kind": "window",
+   "room": "r1",
+   "side": "S",
+   "at": 260,
+   "w": 150
+  },
+  {
+   "id": "o23",
+   "kind": "door",
+   "room": "r2",
+   "side": "S",
+   "at": 20,
+   "w": 80,
+   "hinge": "start",
+   "swing": "in"
+  },
+  {
+   "id": "o24",
+   "kind": "window",
+   "room": "r2",
+   "side": "S",
+   "at": 260,
+   "w": 150
+  },
+  {
+   "id": "o25",
+   "kind": "door",
+   "room": "r3",
+   "side": "S",
+   "at": 20,
+   "w": 80,
+   "hinge": "start",
+   "swing": "in"
+  },
+  {
+   "id": "o26",
+   "kind": "window",
+   "room": "r3",
+   "side": "S",
+   "at": 260,
+   "w": 150
+  },
+  {
+   "id": "o27",
+   "kind": "door",
+   "room": "r4",
+   "side": "S",
+   "at": 20,
+   "w": 80,
+   "hinge": "start",
+   "swing": "in"
+  },
+  {
+   "id": "o28",
+   "kind": "window",
+   "room": "r4",
+   "side": "S",
+   "at": 350,
+   "w": 60
+  },
+  {
+   "id": "o29",
+   "kind": "door",
+   "room": "r5",
+   "side": "S",
+   "at": 20,
+   "w": 80,
+   "hinge": "start",
+   "swing": "in"
+  },
+  {
+   "id": "o30",
+   "kind": "window",
+   "room": "r5",
+   "side": "N",
+   "at": 290,
+   "w": 120
+  },
+  {
+   "id": "o31",
+   "kind": "door",
+   "room": "r6",
+   "side": "S",
+   "at": 20,
+   "w": 80,
+   "hinge": "start",
+   "swing": "in"
+  },
+  {
+   "id": "o32",
+   "kind": "window",
+   "room": "r6",
+   "side": "N",
+   "at": 310,
+   "w": 100
+  },
+  {
+   "id": "o33",
+   "kind": "door",
+   "room": "r7",
+   "side": "S",
+   "at": 20,
+   "w": 80,
+   "hinge": "start",
+   "swing": "in"
+  },
+  {
+   "id": "o34",
+   "kind": "window",
+   "room": "r7",
+   "side": "N",
+   "at": 350,
+   "w": 60
+  },
+  {
+   "id": "o35",
+   "kind": "door",
+   "room": "r8",
+   "side": "S",
+   "at": 20,
+   "w": 80,
+   "hinge": "start",
+   "swing": "in"
+  },
+  {
+   "id": "o36",
+   "kind": "window",
+   "room": "r8",
+   "side": "N",
+   "at": 290,
+   "w": 120
+  },
+  {
+   "id": "o37",
+   "kind": "door",
+   "room": "r9",
+   "side": "S",
+   "at": 20,
+   "w": 80,
+   "hinge": "start",
+   "swing": "in"
+  },
+  {
+   "id": "o38",
+   "kind": "door",
+   "room": "r10",
+   "side": "S",
+   "at": 20,
+   "w": 80,
+   "hinge": "start",
+   "swing": "in"
+  },
+  {
+   "id": "o39",
+   "kind": "door",
+   "room": "r11",
+   "side": "S",
+   "at": 20,
+   "w": 80,
+   "hinge": "start",
+   "swing": "in"
+  },
+  {
+   "id": "o40",
+   "kind": "door",
+   "room": "r12",
+   "side": "S",
+   "at": 20,
+   "w": 80,
+   "hinge": "start",
+   "swing": "in"
+  },
+  {
+   "id": "o41",
+   "kind": "door",
+   "room": "r13",
+   "side": "S",
+   "at": 20,
+   "w": 80,
+   "hinge": "start",
+   "swing": "in"
+  },
+  {
+   "id": "o42",
+   "kind": "window",
+   "room": "r13",
+   "side": "S",
+   "at": 290,
+   "w": 120
+  },
+  {
+   "id": "o43",
+   "kind": "door",
+   "room": "r14",
+   "side": "S",
+   "at": 20,
+   "w": 80,
+   "hinge": "start",
+   "swing": "in"
+  },
+  {
+   "id": "o44",
+   "kind": "window",
+   "room": "r14",
+   "side": "S",
+   "at": 350,
+   "w": 60
+  },
+  {
+   "id": "o45",
+   "kind": "door",
+   "room": "r15",
+   "side": "S",
+   "at": 20,
+   "w": 80,
+   "hinge": "start",
+   "swing": "in"
+  },
+  {
+   "id": "o46",
+   "kind": "window",
+   "room": "r15",
+   "side": "S",
+   "at": 350,
+   "w": 60
+  },
+  {
+   "id": "o47",
+   "kind": "door",
+   "room": "r16",
+   "side": "S",
+   "at": 20,
+   "w": 80,
+   "hinge": "start",
+   "swing": "in"
+  },
+  {
+   "id": "o48",
+   "kind": "window",
+   "room": "r16",
+   "side": "S",
+   "at": 290,
+   "w": 120
+  },
+  {
+   "id": "o49",
+   "kind": "door",
+   "room": "r17",
+   "side": "S",
+   "at": 20,
+   "w": 80,
+   "hinge": "start",
+   "swing": "in"
+  },
+  {
+   "id": "o50",
+   "kind": "window",
+   "room": "r17",
+   "side": "N",
+   "at": 290,
+   "w": 120
+  },
+  {
+   "id": "o51",
+   "kind": "door",
+   "room": "r18",
+   "side": "S",
+   "at": 20,
+   "w": 80,
+   "hinge": "start",
+   "swing": "in"
+  },
+  {
+   "id": "o52",
+   "kind": "window",
+   "room": "r18",
+   "side": "N",
+   "at": 260,
+   "w": 150
+  },
+  {
+   "id": "o53",
+   "kind": "door",
+   "room": "r19",
+   "side": "S",
+   "at": 20,
+   "w": 80,
+   "hinge": "start",
+   "swing": "in"
+  },
+  {
+   "id": "o54",
+   "kind": "window",
+   "room": "r19",
+   "side": "N",
+   "at": 310,
+   "w": 100
+  },
+  {
+   "id": "o55",
+   "kind": "door",
+   "room": "r20",
+   "side": "S",
+   "at": 20,
+   "w": 80,
+   "hinge": "start",
+   "swing": "in"
+  },
+  {
+   "id": "o56",
+   "kind": "window",
+   "room": "r20",
+   "side": "N",
+   "at": 290,
+   "w": 120
+  }
+ ],
+ "sections": [],
+ "seq": 57
+}

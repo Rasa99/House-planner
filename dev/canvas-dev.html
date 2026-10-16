@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Canvas dev</title>
+<link rel="stylesheet" href="../src/theme.css">
+<link rel="stylesheet" href="../src/app.css">
+<style>
+  /* dev shell only: a bar, a small palette and the board */
+  #devapp { display: grid; height: 100vh; grid-template-columns: 170px 1fr; grid-template-rows: 44px 1fr;
+            grid-template-areas: "bar bar" "pal stage"; }
+  #devpal { grid-area: pal; }
+  #stage { grid-area: stage; }
+  #devbar { grid-area: bar; display: flex; gap: 6px; align-items: center; padding: 0 10px;
+            background: var(--panel); border-bottom: 1px solid var(--line); font-size: 12px; }
+  #devbar button, .dtile { background: var(--panel2); color: var(--ink); border: 1px solid var(--line2);
+            border-radius: 7px; padding: 6px 9px; font: 500 12px var(--sans); cursor: pointer; }
+  #devbar button.on { background: var(--accent); color: var(--accent-ink); }
+  #devbar .out { margin-left: auto; font-family: var(--mono); color: var(--muted); white-space: nowrap; }
+  #devpal { background: var(--panel); border-right: 1px solid var(--line); padding: 8px; display: flex;
+            flex-direction: column; gap: 5px; overflow: auto; }
+  .dtile { text-align: left; touch-action: none; }
+  #stage { position: relative; min-width: 0; min-height: 0; overflow: hidden; }
+  #toast { position: fixed; right: 12px; bottom: 12px; max-width: 360px; background: var(--panel3); color: var(--ink);
+           padding: 8px 12px; border-radius: 8px; font-size: 13px; opacity: 0; transition: opacity .2s; }
+  #toast.on { opacity: 1; }
+</style>
+</head>
+<body>
+<div id="devapp">
+  <div id="devbar">
+    <button id="bSample">Sample house</button>
+    <button id="b20">20 rooms</button>
+    <button id="bEmpty">Empty land</button>
+    <button id="bTool">Land tool</button>
+    <button id="bFit">Fit</button>
+    <button id="bUndo">Undo</button>
+    <button id="bRedo">Redo</button>
+    <span class="out" id="out"></span>
+  </div>
+  <div id="devpal"></div>
+  <main id="stage"></main>
+</div>
+<div id="toast"></div>
+<!-- the real modules (a missing one 404s and the stub stands in) -->
+<script>
+/* cache-busted script loads: the embedded browser pane caches hard */
+(function () {
+  const v = Date.now();
+  const list = ["../src/core.js", "../src/store.js", "../src/analyze.js", "../src/model.js", "../src/furniture.js",
+                "../src/drawing.js", "../src/render.js", "../src/canvas.js", "canvas-stub.js"];
+  for (const s of list) document.write("<scr" + "ipt src=\"" + s + "?v=" + v + "\"></scr" + "ipt>");
+})();
+</script>
+<script>
+"use strict";
+(function () {
+  const $ = id => document.getElementById(id);
+  HP.store.init(HP.newPlan());
+  HP.canvas.init($("stage"));
+
+  // a palette that behaves like the panels' tiles: 4 px move -> palette:start, else palette:click
+  const ITEMS = [];
+  for (const t of HP.ROOM_ORDER) ITEMS.push({ label: HP.ROOM_TYPES[t].label, item: { kind: "room", type: t } });
+  ITEMS.push({ label: "Door 0.80", item: { kind: "door", w: 80 } }, { label: "Door 1.00", item: { kind: "door", w: 100 } });
+  for (const w of HP.WINDOW_SIZES) ITEMS.push({ label: "Window " + HP.fmtM(w), item: { kind: "window", w } });
+  ITEMS.push({ label: "Section A-A", item: { kind: "section" } });
+  for (const it of ITEMS) {
+    const b = document.createElement("button");
+    b.className = "dtile"; b.textContent = it.label; b.dataset.item = JSON.stringify(it.item);
+    b.addEventListener("pointerdown", e => {
+      if (e.button !== 0) return;
+      e.preventDefault();
+      const x0 = e.clientX, y0 = e.clientY, pid = e.pointerId;
+      const end = () => { window.removeEventListener("pointermove", mv, true); window.removeEventListener("pointerup", up, true); };
+      const mv = ev => { if (ev.pointerId !== pid || Math.hypot(ev.clientX - x0, ev.clientY - y0) < 4) return; end(); HP.store.emit("palette:start", { item: Object.assign({}, it.item), event: ev }); };
+      const up = ev => { if (ev.pointerId !== pid) return; end(); HP.store.emit("palette:click", { item: Object.assign({}, it.item) }); };
+      window.addEventListener("pointermove", mv, true); window.addEventListener("pointerup", up, true);
+    });
+    $("devpal").appendChild(b);
+  }
+  async function load(path) {
+    const t = await (await fetch(path, { cache: "no-store" })).text();
+    HP.store.load(HP.deserialize(t), "Open"); HP.canvas.fit();
+  }
+  $("bSample").onclick = () => load("../test/fixtures/sample-house.json");
+  $("b20").onclick = () => load("../test/fixtures/model-20rooms.json");
+  $("bEmpty").onclick = () => { HP.store.load(HP.newPlan(), "New"); HP.canvas.fit(); };
+  $("bTool").onclick = () => { HP.store.setTool(HP.store.tool() === "plot" ? "select" : "plot"); $("bTool").classList.toggle("on", HP.store.tool() === "plot"); };
+  $("bFit").onclick = () => HP.canvas.fit();
+  $("bUndo").onclick = () => HP.store.undo();
+  $("bRedo").onclick = () => HP.store.redo();
+  let tt = 0;
+  HP.store.on("message", m => { const el = $("toast"); el.textContent = m.text; el.classList.add("on"); clearTimeout(tt); tt = setTimeout(() => el.classList.remove("on"), 2600); });
+  HP.store.on("view", v => { $("out").textContent = "scale " + v.scale.toFixed(1) + " px/m"; });
+  HP.store.on("select", s => { $("out").textContent = "sel " + JSON.stringify(s); });
+  window.addEventListener("keydown", e => {
+    if (!(e.ctrlKey || e.metaKey)) return;
+    if (e.key === "z") { e.preventDefault(); HP.store.undo(); } else if (e.key === "y") { e.preventDefault(); HP.store.redo(); }
+  });
+  if (location.search.indexOf("empty") < 0) load("../test/fixtures/sample-house.json");
+})();
+</script>
+</body>
+</html>
